@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:50:58 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/12 23:19:56 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/13 01:22:38 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 int		main(void)
 {
-	char	*addr;
+	char	*addr[1000];
 	int		i;
 
 	i = -1;
 	while (++i < 126)
-		addr = malloc(1024);
+		addr[i] = malloc(1024);
 	show_alloc_mem_ex();
+	ft_printf("%p || %c\n", check_pointer(addr[54]), g_menv->curr_zone);
 	return (0);
 }
 
-//#define VAL 16
-#include <string.h>
-#include <time.h>
+//#define VAL 1p
+//#include <string.h>
+//#include <time.h>
 
 /*static void free_fbabin(char *str[44000])
 {

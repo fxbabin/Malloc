@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:52:41 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/12 23:24:54 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/13 00:46:36 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # define PAGE_SIZE		4096
 
 # define S_BLOCK		sizeof(t_block)
-
 # define S_ZONE			sizeof(t_zone)
 
 # define NB_BLOCK		126
@@ -112,6 +111,7 @@ void				*add_block(t_zone **zone, int size, int min_size);
 */
 
 void				*zonepushfront(t_zone **zone, size_t size, size_t avail);
+void				*lzonepushfront(t_zone **zone, size_t size);
 t_zone				*get_correct_zone(t_zone *zone, size_t size);
 
 /*
@@ -119,7 +119,7 @@ t_zone				*get_correct_zone(t_zone *zone, size_t size);
 */
 
 int					init_menv(void);
-//void				*check_pointer(void *ptr);
+void				*check_pointer(void *ptr);
 //void				*free_large(void *zone);
 
 /*

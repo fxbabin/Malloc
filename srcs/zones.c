@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 15:47:13 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/12 22:59:12 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/13 00:46:15 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int					init_menv(void)
 	g_menv->tiny = NULL;
 	g_menv->small = NULL;
 	g_menv->large = NULL;
-	g_menv->curr_zone = 't';
+	g_menv->curr_zone = 'z';
 	return (0);
 }
 
@@ -40,7 +40,7 @@ static t_zone		*zonecreate(size_t size, size_t avail)
 	ret->prev = NULL;
 	curr = (t_block*)((size_t)ret + S_ZONE);
 	curr->prev = NULL;
-	curr->size = -((int)(avail));
+	curr->size = -((int)(avail + (NB_BLOCK - 1) * S_BLOCK));
 	curr->next = NULL;
 	return (ret);
 }
