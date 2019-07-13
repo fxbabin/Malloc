@@ -6,12 +6,12 @@
 #    By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/17 15:40:11 by fbabin            #+#    #+#              #
-#    Updated: 2019/07/13 01:24:05 by fbabin           ###   ########.fr        #
+#    Updated: 2019/07/13 17:29:14 by fbabin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC				=	gcc
-CFLAGS			=	-Wall -Werror -Wextra -Weverything
+CFLAGS			=	-Wall -Werror -Wextra -Weverything -fsanitize=address -g3
 
 ifeq ($(HOSTTYPE),)
 	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
@@ -22,7 +22,7 @@ NAME			=	libft_malloc_$(HOSTTYPE).so
 LINK			=	libft_malloc.so
 _SRCS			=	malloc.c zones.c show_alloc_mem.c show_alloc_mem_ex.c \
 					malloc_good_size.c utils.c check_pointer.c large_zones.c \
-					free.c
+					free.c realloc.c
 					#ree_large.c \
 					free.c utils.c show_alloc_mem.c realloc.c check_pointer.c
 _SRCS_TEST		=	main.c

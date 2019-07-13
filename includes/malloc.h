@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:52:41 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/13 00:46:36 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/13 15:53:33 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,13 @@ extern t_menv		*g_menv;
 */
 
 void				*malloc(size_t size);
+void				free(void *ptr);
 //void				*realloc(void *ptr, size_t size);
-//void				free(void *ptr);
+//void				*calloc(size_t nmemb, size_t size);
 
 size_t				malloc_size(void *ptr);
 size_t				malloc_good_size(size_t size);
 
-//void				*calloc(size_t nmemb, size_t size);
 void				show_alloc_mem(void);
 void				show_alloc_mem_ex(void);
 
@@ -120,7 +120,6 @@ t_zone				*get_correct_zone(t_zone *zone, size_t size);
 
 int					init_menv(void);
 void				*check_pointer(void *ptr);
-//void				*free_large(void *zone);
 
 /*
 ** ---------------------------- UTILS FUNCTIONS ------------------------------

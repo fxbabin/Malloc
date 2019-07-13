@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:44:41 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/13 01:21:39 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/13 18:49:32 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,47 @@ size_t			malloc_good_size(size_t size)
 	return((size % PAGE_SIZE == 0) ? size : size - size % PAGE_SIZE + PAGE_SIZE);
 }
 
+static size_t		check_blockzone(t_zone *zone, void *ptr)
+{
+	t_block		*block;
+
+	while (zone)
+	{
+		block = (t_block*)((size_t)zone + S_ZONE);
+		while (block)
+		{
+			if ((void*)((size_t)block + S_BLOCK) == ptr && block->size > 0)
+				return ((size_t)block->size);
+			block = block->next;
+		}
+		zone = zone->next;
+	}
+	return (0);
+}
+
+static size_t		check_large(void *ptr)
+{
+	t_zone		*zone;
+
+	zone = g_menv->large;
+	while (zone)
+	{
+		if ((void*)((size_t)zone + S_ZONE) == ptr)
+			return (zone->avail_bytes);
+		zone = zone->next;
+	}
+	return (0);
+}
+
 size_t			malloc_size(void *ptr)
 {
-	if (g_menv->curr_zone == 't' || g_menv->curr_zone == 's')
-		return ((size_t)(((t_block*)((size_t)ptr - S_BLOCK))->size));
-	else if (g_menv->curr_zone == 'l')
-		return ((size_t)(((t_zone*)((size_t)ptr - S_ZONE))->avail_bytes));
+	size_t		ret;
+
+	if ((ret = check_blockzone(g_menv->tiny, ptr)))
+		return (ret);
+	else if ((ret = check_blockzone(g_menv->small, ptr)))
+		return (ret);
+	else if ((ret = check_large(ptr)))
+		return (ret);
 	return (0);
 }
