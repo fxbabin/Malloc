@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:43:54 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/13 01:00:10 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/13 23:57:24 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 t_menv				*g_menv = NULL;
 
-static void		*allocate_blockzone(size_t size)
+static void		*allocate_blockzone(t_zone *zone, size_t size)
 {
-	t_zone	*zone;
-
-	zone = NULL;
 	if (g_menv->curr_zone == 't')
 	{
-		if (g_menv->tiny == NULL && !(zonepushfront(&(g_menv->tiny), TINY_ZONE, TINY_DATA)))
+		if (g_menv->tiny == NULL
+			&& !(zonepushfront(&(g_menv->tiny), TINY_ZONE, TINY_DATA)))
 			return (NULL);
 		if (!(zone = get_correct_zone(g_menv->tiny, size)))
 			if (!(zonepushfront(&(g_menv->tiny), TINY_ZONE, TINY_DATA)))
@@ -32,7 +30,8 @@ static void		*allocate_blockzone(size_t size)
 	}
 	if (g_menv->curr_zone == 's')
 	{
-		if (g_menv->small == NULL && !(zonepushfront(&(g_menv->small), SMALL_ZONE, SMALL_DATA)))
+		if (g_menv->small == NULL
+			&& !(zonepushfront(&(g_menv->small), SMALL_ZONE, SMALL_DATA)))
 			return (NULL);
 		if (!(zone = get_correct_zone(g_menv->small, size)))
 			if (!(zonepushfront(&(g_menv->small), SMALL_ZONE, SMALL_DATA)))
@@ -51,7 +50,7 @@ static void		*ptr_allocate(size_t size)
 
 	ptr = NULL;
 	zone = NULL;
-	if ((ptr = allocate_blockzone(size)))
+	if ((ptr = allocate_blockzone(NULL, size)))
 		return (ptr);
 	if (g_menv->curr_zone == 'l')
 	{

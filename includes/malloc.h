@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:52:41 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/13 15:53:33 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/13 22:40:38 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@
 # define TINY_MIN		16
 # define TINY_BLOCK		1024
 # define TINY_DATA		NB_BLOCK * TINY_BLOCK
-# define TINY_ZONE		(S_ZONE + TINY_DATA) + (PAGE_SIZE - ((S_ZONE + TINY_DATA) % PAGE_SIZE))
+# define TINY_IZONE		S_ZONE + TINY_DATA
+# define TINY_ZONE		TINY_IZONE + (PAGE_SIZE - ((TINY_IZONE) % PAGE_SIZE))
 
 # define SMALL_MIN		512
 # define SMALL_BLOCK	131072
 # define SMALL_DATA		NB_BLOCK * SMALL_BLOCK
-# define SMALL_ZONE		(S_ZONE + SMALL_DATA) + (PAGE_SIZE - ((S_ZONE + SMALL_DATA) % PAGE_SIZE))
+# define SMALL_IZONE	S_ZONE + SMALL_DATA
+# define SMALL_ZONE		SMALL_IZONE + (PAGE_SIZE - ((SMALL_IZONE) % PAGE_SIZE))
 
 # define LARGE_MIN		4096
 
@@ -64,14 +66,6 @@ typedef struct		s_zone
 	size_t			avail_bytes;
 }					t_zone;
 
-/*typedef struct		s_lzone
-{
-	struct s_lzone	*next_zone;
-	struct s_lzone	*prev_zone;
-	size_t			size;
-}					t_lzone;
-*/
-
 typedef struct		s_menv
 {
 	t_zone			*tiny;
@@ -91,8 +85,10 @@ extern t_menv		*g_menv;
 
 void				*malloc(size_t size);
 void				free(void *ptr);
-//void				*realloc(void *ptr, size_t size);
-//void				*calloc(size_t nmemb, size_t size);
+void				*realloc(void *ptr, size_t size);
+void				*reallocf(void *ptr, size_t size);
+void				*calloc(size_t nmemb, size_t size);
+void				*valloc(size_t size);
 
 size_t				malloc_size(void *ptr);
 size_t				malloc_good_size(size_t size);

@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:44:41 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/13 18:49:32 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/14 00:01:33 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,24 @@
 
 size_t			malloc_good_size(size_t size)
 {
+	size_t		tmp;
+
+	tmp = 0;
 	if (size < TINY_BLOCK)
-		return((size % TINY_MIN == 0) ?
-			size : size - size % TINY_MIN + TINY_MIN);
+	{
+		tmp = size - size % TINY_MIN + TINY_MIN;
+		return ((size % TINY_MIN == 0) ? size : tmp);
+	}
 	else if (size < SMALL_BLOCK)
-		return((size % SMALL_MIN == 0) ?
-			size : size - size % SMALL_MIN + SMALL_MIN);
-	return((size % PAGE_SIZE == 0) ? size : size - size % PAGE_SIZE + PAGE_SIZE);
+	{
+		tmp = size - size % SMALL_MIN + SMALL_MIN;
+		return ((size % SMALL_MIN == 0) ? size : tmp);
+	}
+	tmp = size - size % PAGE_SIZE + PAGE_SIZE;
+	return ((size % PAGE_SIZE == 0) ? size : tmp);
 }
 
-static size_t		check_blockzone(t_zone *zone, void *ptr)
+static size_t	check_blockzone(t_zone *zone, void *ptr)
 {
 	t_block		*block;
 
@@ -41,7 +49,7 @@ static size_t		check_blockzone(t_zone *zone, void *ptr)
 	return (0);
 }
 
-static size_t		check_large(void *ptr)
+static size_t	check_large(void *ptr)
 {
 	t_zone		*zone;
 

@@ -6,13 +6,13 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:44:22 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/13 16:48:21 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/13 23:58:18 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-static t_zone		*free_blockzone(t_zone **g_zone, t_zone *zone)
+static t_zone	*free_blockzone(t_zone **g_zone, t_zone *zone)
 {
 	size_t		data_zone;
 	size_t		min_zone;
@@ -94,9 +94,11 @@ void			free(void *ptr)
 
 	if (!ptr || !(zone = check_pointer(ptr)))
 		return ;
-	if (g_menv->curr_zone == 't' && !(free_blockzone_ptr(&g_menv->tiny, zone, ptr)))
+	if (g_menv->curr_zone == 't'
+		&& !(free_blockzone_ptr(&g_menv->tiny, zone, ptr)))
 		return ;
-	if (g_menv->curr_zone == 's' && !(free_blockzone_ptr(&g_menv->small, zone, ptr)))
+	if (g_menv->curr_zone == 's'
+		&& !(free_blockzone_ptr(&g_menv->small, zone, ptr)))
 		return ;
 	else if (g_menv->curr_zone == 'l' && !(free_large(zone)))
 		return ;
