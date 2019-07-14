@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:44:22 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/14 23:11:50 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/14 23:16:12 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,6 @@ void			free_lock(void *ptr)
 void			free(void *ptr)
 {
 	pthread_mutex_lock(&g_mutex);
-	//ft_dprintf(2, "FREE B\n");
 	free_lock(ptr);
-	//ft_dprintf(2, "FREE E\n");
 	pthread_mutex_unlock(&g_mutex);
 }

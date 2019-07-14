@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:43:54 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/14 23:11:30 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/14 23:15:43 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void			*malloc_lock(size_t size)
 void			*malloc(size_t size)
 {
 	void	*ptr;
-	
+
 	pthread_mutex_lock(&g_mutex);
 	ptr = malloc_lock(size);
 	pthread_mutex_unlock(&g_mutex);

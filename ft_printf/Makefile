@@ -6,7 +6,7 @@
 #    By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 17:49:24 by fbabin            #+#    #+#              #
-#    Updated: 2019/07/14 17:49:04 by fbabin           ###   ########.fr        #
+#    Updated: 2019/07/14 23:14:21 by fbabin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $(NAME): $(OBJS)
 		@echo "$(NAME) : $(_GREEN)Done$(_END)"
 
 %.o: %.c
-		$(CC) $(CFLAGS) -c $< -o $@ -I includes/
+		@$(CC) $(CFLAGS) -c $< -o $@ -I includes/
 
 clean:
 	@$(RM) -f $(OBJS)

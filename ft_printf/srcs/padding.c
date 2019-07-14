@@ -6,7 +6,7 @@
 /*   By: misteir <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:32:33 by misteir           #+#    #+#             */
-/*   Updated: 2019/07/14 17:47:59 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/14 23:16:48 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		add_zeros(t_buff *b, t_printf *t, int len)
 		bflush(b, "0", 1);
 }
 
-void		add_spaces(t_buff *b, t_printf *t, int len)
+void			add_spaces(t_buff *b, t_printf *t, int len)
 {
 	int		n;
 
@@ -53,7 +53,7 @@ void		add_spaces(t_buff *b, t_printf *t, int len)
 		bflush(b, " ", 1);
 }
 
-void		ft_padding_b(t_buff *b, t_printf *t, int len)
+void			ft_padding_b(t_buff *b, t_printf *t, int len)
 {
 	if (!t->minus)
 		add_spaces(b, t, len);
@@ -72,13 +72,13 @@ void		ft_padding_b(t_buff *b, t_printf *t, int len)
 	add_zeros(b, t, len);
 }
 
-void		ft_padding_a(t_buff *b, t_printf *t, int len)
+void			ft_padding_a(t_buff *b, t_printf *t, int len)
 {
 	if (t->nb > 0 && t->minus)
 		add_spaces(b, t, len);
 }
 
-void		ft_handler(t_buff *b, t_printf *t, va_list args)
+void			ft_handler(t_buff *b, t_printf *t, va_list args)
 {
 	if (ft_charinsetp(t->flag, "sS"))
 		ft_handle_wstr(b, t, args);

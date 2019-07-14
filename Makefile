@@ -6,7 +6,7 @@
 #    By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/17 15:40:11 by fbabin            #+#    #+#              #
-#    Updated: 2019/07/14 23:04:38 by fbabin           ###   ########.fr        #
+#    Updated: 2019/07/14 23:14:04 by fbabin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ $(OBJS_DIR):
 		@mkdir -p $(OBJS_DIR)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADER)
-		$(CC) $(CFLAGS) -fPIC $(INCS) -c -o $@ $<
+		@$(CC) $(CFLAGS) -fPIC $(INCS) -c -o $@ $<
 
 lib:
 	@make -C $(LIB_DIR)
