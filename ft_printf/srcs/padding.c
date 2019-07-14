@@ -6,13 +6,13 @@
 /*   By: misteir <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:32:33 by misteir           #+#    #+#             */
-/*   Updated: 2019/07/06 14:08:52 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/14 17:47:59 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		add_zeros(t_buff *b, t_printf *t, int len)
+static void		add_zeros(t_buff *b, t_printf *t, int len)
 {
 	int		n;
 

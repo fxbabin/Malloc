@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 17:43:01 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/06 14:06:19 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/14 17:46:07 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 ** --------------------------------- DEFINES ---------------------------------
 */
 
-# define BUFF_SIZE	128
+# define BUFF_SIZE	4096
 # define RED		0xE71010
 # define LRED		0xF3664D
 # define GREEN		0x219A25
@@ -48,14 +48,15 @@
 
 typedef struct			s_buff
 {
-	char				buff[BUFF_SIZE + 1];
+	char				*str;
 	int					len;
 	int					pos;
 	int					err;
 	int					fd;
-	char				*str;
-	char				sprintf;
 	int					err_len;
+	char				sprintf;
+	char				buff[BUFF_SIZE + 1];
+	char				reserved[2];
 }						t_buff;
 
 typedef struct			s_printf
@@ -71,6 +72,7 @@ typedef struct			s_printf
 	char				mod1;
 	char				mod2;
 	char				neg;
+	char				reserved[3];
 }						t_printf;
 
 /*

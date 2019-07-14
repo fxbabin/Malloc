@@ -6,12 +6,12 @@
 #    By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/17 15:40:11 by fbabin            #+#    #+#              #
-#    Updated: 2019/07/13 22:12:20 by fbabin           ###   ########.fr        #
+#    Updated: 2019/07/14 17:50:29 by fbabin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC				=	gcc
-CFLAGS			=	-Wall -Werror -Wextra -Weverything -fsanitize=address -g3
+CFLAGS			=	-Wall -Werror -Wextra
 
 ifeq ($(HOSTTYPE),)
 	HOSTTYPE := $(shell uname -m)_$(shell uname -s)

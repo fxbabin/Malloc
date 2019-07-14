@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 20:11:01 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/06 14:10:36 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/14 17:48:33 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int		ft_xtract_float(t_printf *t, const char *fmt)
 	return (i);
 }
 
-void			handle_wildcards(t_printf *t, va_list args, char before)
+static void		handle_wildcards(t_printf *t, va_list args, char before)
 {
 	int		nb;
 
@@ -65,7 +65,7 @@ void			handle_wildcards(t_printf *t, va_list args, char before)
 		t->nb = ft_absp(nb);
 }
 
-void			ft_xtractor_bis(t_printf *t, const char *fmt, va_list args,
+static void		ft_xtractor_bis(t_printf *t, const char *fmt, va_list args,
 					int *i)
 {
 	if (fmt[*i] == '.')
