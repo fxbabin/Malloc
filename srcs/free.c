@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:44:22 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/14 17:29:10 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/14 23:11:50 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void		*free_blockzone_ptr(t_zone **g_zone, t_zone *zone, void *ptr)
 	block = (t_block*)((size_t)ptr - S_BLOCK);
 	if (block->size <= 0)
 		return (NULL);
-	zone->avail_bytes += (size_t)block->size;
+	zone->avail_bytes += (size_t)block->size + S_BLOCK;
 	block->size = -(block->size);
 	if (block->next && block->next->size <= 0)
 	{
@@ -108,6 +108,8 @@ void			free_lock(void *ptr)
 void			free(void *ptr)
 {
 	pthread_mutex_lock(&g_mutex);
+	//ft_dprintf(2, "FREE B\n");
 	free_lock(ptr);
+	//ft_dprintf(2, "FREE E\n");
 	pthread_mutex_unlock(&g_mutex);
 }

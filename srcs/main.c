@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:50:58 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/13 16:48:53 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/14 21:41:00 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,42 @@ int		main(void)
 
 	i = -1;
 	while (++i < 300)
-		addr[i] = malloc(1024);
-	show_alloc_mem_ex();
-	//i = -1;
+		addr[i] = malloc_lock(16);
+	i = -1;
+	while (++i < 300)
+	{
+		//free(addr[i]);
+		//ft_printf("%d\n", i);
+		/*if (i == 117)
+		{
+			show_alloc_mem_ex();
+			ft_printf("%p\n", addr[i]);
+		}*/
+		addr[i] = realloc_lock(addr[i], 1024);
+		//if (i == 26)
+		//	break;
+	}
 	while (--i >= 0)
 		free(addr[i]);
+	addr[0] = malloc(1024);
+	addr[1] = malloc(1024);
+	addr[2] = malloc(1024);
+	addr[3] = malloc(1024);
+	addr[4] = malloc(1024);
+	addr[5] = malloc(1024);
+	addr[6] = malloc(1024);
+	addr[7] = malloc(1024);
+	addr[8] = malloc(1024);
+	addr[9] = malloc(1024);
+	ft_printf("%p\n", ((t_block*)((size_t)addr[9] - S_BLOCK))->prev);
+	//free(addr[9]);
 	show_alloc_mem_ex();
+	/**/
+	/*show_alloc_mem_ex();
+	//i = -1;
+	while (--i >= 0)
+		free(addr[i]);*/
+	//show_alloc_mem_ex();
 	//ft_printf("%p || %c\n", check_pointer(addr[54]), g_menv->curr_zone);
 	return (0);
 }

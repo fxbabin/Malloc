@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:52:41 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/14 17:33:49 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/14 22:53:34 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <pthread.h>
 # include <unistd.h>
 # include "ft_printf.h"
-
+#include <stdio.h>
 /*
 ** --------------------------------- DEFINES ---------------------------------
 */
@@ -35,13 +35,13 @@
 
 # define TINY_MIN		16
 # define TINY_BLOCK		1024
-# define TINY_DATA		NB_BLOCK * TINY_BLOCK
+# define TINY_DATA		NB_BLOCK * (TINY_BLOCK + S_BLOCK)
 # define TINY_IZONE		S_ZONE + TINY_DATA
 # define TINY_ZONE		TINY_IZONE + (PAGE_SIZE - ((TINY_IZONE) % PAGE_SIZE))
 
 # define SMALL_MIN		512
 # define SMALL_BLOCK	131072
-# define SMALL_DATA		NB_BLOCK * SMALL_BLOCK
+# define SMALL_DATA		NB_BLOCK * (SMALL_BLOCK + S_BLOCK)
 # define SMALL_IZONE	S_ZONE + SMALL_DATA
 # define SMALL_ZONE		SMALL_IZONE + (PAGE_SIZE - ((SMALL_IZONE) % PAGE_SIZE))
 

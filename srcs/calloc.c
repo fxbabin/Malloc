@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 21:59:30 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/14 17:33:12 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/14 23:08:59 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		*calloc_lock(size_t count, size_t size)
 {
 	void	*ptr;
 
-	if (!(ptr = malloc(count * size)))
+	if (!(ptr = malloc_lock(count * size)))
 		return (NULL);
 	ft_memset(ptr, 0, malloc_good_size(count * size));
 	return (ptr);

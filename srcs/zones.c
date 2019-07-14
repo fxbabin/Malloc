@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 15:47:13 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/14 16:12:13 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/14 20:38:14 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_zone		*zonecreate(size_t size, size_t avail)
 	ret->prev = NULL;
 	curr = (t_block*)((size_t)ret + S_ZONE);
 	curr->prev = NULL;
-	curr->size = -((int)(avail + (NB_BLOCK - 1) * S_BLOCK));
+	curr->size = -((int)(avail - S_BLOCK));
 	curr->next = NULL;
 	return (ret);
 }
@@ -101,17 +101,20 @@ void				*add_block(t_zone **zone, int size, int min_size)
 			break ;
 		block = block->next;
 	}
+	//ft_printf("%p || %d :: %d\n", block, block->size, size);
 	if ((block->size + size) > -((int)S_BLOCK + min_size))
 		block->size = -(block->size);
 	else
 	{
 		new = (t_block*)((size_t)block + S_BLOCK + (size_t)size);
+		//ft_printf("%p || %p\n", new, (void*)((size_t)new + (size_t)size));
 		new->size = (int)(block->size + (int)(S_BLOCK) + size);
+		//ft_printf("2\n");
 		new->prev = block;
 		new->next = block->next;
 		block->size = size;
 		block->next = new;
 	}
-	(*zone)->avail_bytes -= ((size_t)size);
+	(*zone)->avail_bytes -= ((size_t)size + S_BLOCK);
 	return ((void*)((size_t)block + S_BLOCK));
 }
