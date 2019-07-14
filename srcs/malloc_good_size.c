@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:44:41 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/14 00:01:33 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/14 17:36:57 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,13 @@ size_t			malloc_size(void *ptr)
 {
 	size_t		ret;
 
-	if ((ret = check_blockzone(g_menv->tiny, ptr)))
+	if (!ptr)
+		return (0);
+	if (!g_menv && init_menv() == -1)
+		return (0);
+	if (g_menv->tiny && (ret = check_blockzone(g_menv->tiny, ptr)))
 		return (ret);
-	else if ((ret = check_blockzone(g_menv->small, ptr)))
+	else if (g_menv->small && (ret = check_blockzone(g_menv->small, ptr)))
 		return (ret);
 	else if ((ret = check_large(ptr)))
 		return (ret);

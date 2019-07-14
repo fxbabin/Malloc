@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:44:22 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/13 23:58:18 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/14 17:29:10 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void		*free_large(t_zone *zone)
 	return ((void*)g_menv->large);
 }
 
-void			free(void *ptr)
+void			free_lock(void *ptr)
 {
 	void	*zone;
 
@@ -103,4 +103,11 @@ void			free(void *ptr)
 	else if (g_menv->curr_zone == 'l' && !(free_large(zone)))
 		return ;
 	return ;
+}
+
+void			free(void *ptr)
+{
+	pthread_mutex_lock(&g_mutex);
+	free_lock(ptr);
+	pthread_mutex_unlock(&g_mutex);
 }

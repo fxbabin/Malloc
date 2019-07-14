@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 20:07:44 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/13 18:26:46 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/14 00:14:20 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void			*check_pointer(void *ptr)
 {
 	void	*ret;
 
+	//if (!g_menv)
+	//	return (NULL);
 	if ((ret = check_blockzone(g_menv->tiny, ptr, 't')))
 		return (ret);
 	else if ((ret = check_blockzone(g_menv->small, ptr, 's')))

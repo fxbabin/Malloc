@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:52:41 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/13 22:40:38 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/14 17:33:49 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 */
 
 # include <sys/mman.h>
+# include <pthread.h>
 # include <unistd.h>
 # include "ft_printf.h"
-# include <stdio.h>
 
 /*
 ** --------------------------------- DEFINES ---------------------------------
@@ -75,8 +75,8 @@ typedef struct		s_menv
 	char			reserved[4071];
 }					t_menv;
 
-extern t_menv		*g_menv;
-
+extern t_menv			*g_menv;
+extern pthread_mutex_t	g_mutex;
 /*
 ** ----------------------------------------------------------------------------
 ** -------------------------------- PROTOTYPES --------------------------------
@@ -88,7 +88,10 @@ void				free(void *ptr);
 void				*realloc(void *ptr, size_t size);
 void				*reallocf(void *ptr, size_t size);
 void				*calloc(size_t nmemb, size_t size);
-void				*valloc(size_t size);
+
+void				*malloc_lock(size_t size);
+void				free_lock(void *ptr);
+void				*realloc_lock(void *ptr, size_t size);
 
 size_t				malloc_size(void *ptr);
 size_t				malloc_good_size(size_t size);
