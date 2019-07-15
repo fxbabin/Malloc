@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:45:09 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/15 17:34:53 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/15 19:04:26 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static size_t	show_large_zone(t_zone *zone)
 	return (total);
 }
 
-void			show_alloc_mem(void)
+static void		show_alloc_mem_lock(void)
 {
 	size_t		total;
 
@@ -82,4 +82,11 @@ void			show_alloc_mem(void)
 	total += show_full_zone(g_menv->small, "SMALL");
 	total += show_large_zone(g_menv->large);
 	ft_printf("Total : %zu bytes\n", total);
+}
+
+void			show_alloc_mem(void)
+{
+	pthread_mutex_lock(&g_mutex);
+	show_alloc_mem_lock();
+	pthread_mutex_unlock(&g_mutex);
 }

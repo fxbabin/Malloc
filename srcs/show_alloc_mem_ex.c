@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 14:15:20 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/13 23:54:02 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/15 19:04:54 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ static size_t	show_zone(t_zone *zone)
 		if (block->size > 0)
 		{
 			total += (size_t)block->size;
-			ft_printf("%k%p%k - %k%p%k: %k%5d%k bytes\n", LYELLOW,
+			ft_printf("%k%p%k - %k%p%k: %k%5d%k bytes  [", LYELLOW,
 				(void*)((size_t)block + S_BLOCK), RESET, LYELLOW,
 				(void*)((size_t)block->next), RESET, LRED, block->size, RESET);
+			ft_putstr_size((char *)((size_t)block + S_BLOCK));
 		}
 		else
 		{
@@ -80,7 +81,7 @@ static size_t	show_large_zone(t_zone *zone)
 	return (total);
 }
 
-void			show_alloc_mem_ex(void)
+static void		show_alloc_mem_ex_lock(void)
 {
 	size_t		total;
 
@@ -91,4 +92,11 @@ void			show_alloc_mem_ex(void)
 	total += show_full_zone(g_menv->small, "SMALL");
 	total += show_large_zone(g_menv->large);
 	ft_printf("Total : %zu bytes\n", total);
+}
+
+void			show_alloc_mem_ex(void)
+{
+	pthread_mutex_lock(&g_mutex);
+	show_alloc_mem_ex_lock();
+	pthread_mutex_unlock(&g_mutex);
 }
