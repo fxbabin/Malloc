@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:52:41 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/14 23:17:56 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/15 18:46:40 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,29 +51,29 @@
 ** ------------------------------- STRUCTURES ---------------------------------
 */
 
-typedef struct		s_block
+typedef struct			s_block
 {
-	struct s_block	*prev;
-	struct s_block	*next;
-	int				size;
-	char			reserved[4];
-}					t_block;
+	struct s_block		*prev;
+	struct s_block		*next;
+	int					size;
+	char				reserved[4];
+}						t_block;
 
-typedef struct		s_zone
+typedef struct			s_zone
 {
-	struct s_zone	*next;
-	struct s_zone	*prev;
-	size_t			avail_bytes;
-}					t_zone;
+	struct s_zone		*next;
+	struct s_zone		*prev;
+	size_t				avail_bytes;
+}						t_zone;
 
-typedef struct		s_menv
+typedef struct			s_menv
 {
-	t_zone			*tiny;
-	t_zone			*small;
-	t_zone			*large;
-	char			curr_zone;
-	char			reserved[4071];
-}					t_menv;
+	t_zone				*tiny;
+	t_zone				*small;
+	t_zone				*large;
+	char				curr_zone;
+	char				reserved[4071];
+}						t_menv;
 
 extern t_menv			*g_menv;
 extern pthread_mutex_t	g_mutex;
@@ -83,48 +83,50 @@ extern pthread_mutex_t	g_mutex;
 ** ----------------------------------------------------------------------------
 */
 
-void				*malloc(size_t size);
-void				free(void *ptr);
-void				*realloc(void *ptr, size_t size);
-void				*reallocf(void *ptr, size_t size);
-void				*calloc(size_t nmemb, size_t size);
+void					*malloc(size_t size);
+void					free(void *ptr);
+void					*realloc(void *ptr, size_t size);
+void					*reallocf(void *ptr, size_t size);
+void					*calloc(size_t nmemb, size_t size);
 
-void				*malloc_lock(size_t size);
-void				free_lock(void *ptr);
-void				*realloc_lock(void *ptr, size_t size);
+void					*malloc_lock(size_t size);
+void					free_lock(void *ptr);
+void					*realloc_lock(void *ptr, size_t size);
 
-size_t				malloc_size(void *ptr);
-size_t				malloc_good_size(size_t size);
+size_t					malloc_size_lock(void *ptr);
+size_t					malloc_size(void *ptr);
+size_t					malloc_good_size(size_t size);
 
-void				show_alloc_mem(void);
-void				show_alloc_mem_ex(void);
+void					show_alloc_mem(void);
+void					show_alloc_mem_ex(void);
 
 /*
 ** -------------------------------- BLOCKS ------------------------------------
 */
 
-void				*add_block(t_zone **zone, int size, int min_size);
+void					*add_block(t_zone **zone, int size, int min_size);
 
 /*
 ** -------------------------------- ZONES -------------------------------------
 */
 
-void				*zonepushfront(t_zone **zone, size_t size, size_t avail);
-void				*lzonepushfront(t_zone **zone, size_t size);
-t_zone				*get_correct_zone(t_zone *zone, size_t size);
+void					*zonepushfront(t_zone **zone, size_t size,
+								size_t avail);
+void					*lzonepushfront(t_zone **zone, size_t size);
+t_zone					*get_correct_zone(t_zone *zone, size_t size);
 
 /*
 ** -------------------------------- OTHERS ------------------------------------
 */
 
-int					init_menv(void);
-void				*check_pointer(void *ptr);
+int						init_menv(void);
+void					*check_pointer(void *ptr);
 
 /*
 ** ---------------------------- UTILS FUNCTIONS ------------------------------
 */
 
-void				ft_putstr_size(char *str);
-void				*ft_memcpy(void *dst, void *src, size_t n);
+void					ft_putstr_size(char *str);
+void					*ft_memcpy(void *dst, void *src, size_t n);
 
 #endif

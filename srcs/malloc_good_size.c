@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:44:41 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/14 23:11:22 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/15 18:43:39 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static size_t	check_large(void *ptr)
 	return (0);
 }
 
-size_t			malloc_size(void *ptr)
+size_t			malloc_size_lock(void *ptr)
 {
 	size_t		ret;
 
@@ -78,4 +78,14 @@ size_t			malloc_size(void *ptr)
 	else if ((ret = check_large(ptr)))
 		return (ret);
 	return (0);
+}
+
+size_t			malloc_size(void *ptr)
+{
+	size_t		ret;
+
+	pthread_mutex_lock(&g_mutex);
+	ret = malloc_size_lock(ptr);
+	pthread_mutex_unlock(&g_mutex);
+	return (ret);
 }

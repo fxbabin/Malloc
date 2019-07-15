@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:45:09 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/13 23:52:47 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/15 17:34:53 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ static size_t	show_zone(t_zone *zone)
 {
 	t_block		*block;
 	size_t		total;
-	int			i;
 
-	i = -1;
 	total = 0;
 	block = (t_block*)((size_t)zone + S_ZONE);
 	while (block)
@@ -26,7 +24,7 @@ static size_t	show_zone(t_zone *zone)
 		if (block->size > 0)
 		{
 			total += (size_t)block->size;
-			ft_printf("%d :: %p - %p: %4d bytes\n", ++i,
+			ft_printf("%p - %p: %4d bytes\n",
 				(void*)((size_t)block + S_BLOCK),
 				(void*)((size_t)block->next), block->size);
 		}

@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:44:22 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/14 23:16:12 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/15 18:44:30 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void			free_lock(void *ptr)
 		return ;
 	else if (g_menv->curr_zone == 'l' && !(free_large(zone)))
 		return ;
+	(void)ptr;
 	return ;
 }
 

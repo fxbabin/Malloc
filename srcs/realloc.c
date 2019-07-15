@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 16:50:41 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/14 23:12:35 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/15 18:41:25 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ void			*realloc_lock(void *ptr, size_t size)
 	size_t		size_block;
 	void		*new;
 
-	if (!(size_block = malloc_size(ptr)))
+	if (!ptr)
+		return (malloc_lock(size));
+	if (!(size_block = malloc_size_lock(ptr)))
 		return (NULL);
-	if (size <= size_block)
-		return (NULL);
+	if (malloc_good_size(size) <= size_block)
+		return (ptr);
 	if (!(new = malloc_lock(size)))
 		return (NULL);
 	ft_memcpy(new, ptr, size_block);
