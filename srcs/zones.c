@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 15:47:13 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/14 23:15:22 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/15 20:23:33 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int					init_menv(void)
 {
-	if (!(g_menv = (t_menv*)mmap(0, PAGE_SIZE, PROT_READ | PROT_WRITE,
-					MAP_ANON | MAP_PRIVATE, -1, 0)))
+	if ((g_menv = (t_menv*)mmap(0, PAGE_SIZE, PROT_READ | PROT_WRITE,
+					MAP_ANON | MAP_PRIVATE, -1, 0)) == MAP_FAILED)
 	{
 		ft_dprintf(2, "Error :: g_menv mmap failed (init_menv)\n");
 		return (-1);
@@ -32,8 +32,8 @@ static t_zone		*zonecreate(size_t size, size_t avail)
 	t_zone		*ret;
 	t_block		*curr;
 
-	if (!(ret = (t_zone*)mmap(0, size, PROT_READ | PROT_WRITE,
-					MAP_ANON | MAP_PRIVATE, -1, 0)))
+	if ((ret = (t_zone*)mmap(0, size, PROT_READ | PROT_WRITE,
+					MAP_ANON | MAP_PRIVATE, -1, 0)) == MAP_FAILED)
 		return (NULL);
 	ret->avail_bytes = avail;
 	ret->next = NULL;

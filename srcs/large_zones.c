@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/05 13:44:16 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/13 00:44:11 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/15 20:09:24 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static t_zone		*lzonecreate(size_t size)
 {
 	t_zone		*ret;
 
-	if (!(ret = (t_zone*)mmap(0, PAGE_SIZE + size, PROT_READ | PROT_WRITE,
-					MAP_ANON | MAP_PRIVATE, -1, 0)))
+	if ((ret = (t_zone*)mmap(0, PAGE_SIZE + size, PROT_READ | PROT_WRITE,
+					MAP_ANON | MAP_PRIVATE, -1, 0)) == MAP_FAILED)
 		return (NULL);
 	ret->next = NULL;
 	ret->prev = NULL;
