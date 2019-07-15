@@ -6,7 +6,7 @@
 /*   By: fbabin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 19:05:44 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/15 19:14:46 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/15 20:44:00 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 int		main(void)
 {
-	char	*addr[4000];
-	int		i;
+	void *ptr;
 
-	i = -1;
-	while (++i < 300)
-		addr[i] = malloc(16);
-	while (--i >= 0)
-		addr[i] = realloc(addr[i], 32);
-	while (++i < 300)
-		free(addr[i]);
-	show_alloc_mem_ex();
+	ptr = malloc(992);
+	ptr = malloc(1024);
+	ptr = malloc(1024 * 32);
+	ptr = malloc(1024 * 1024);
+	ptr = malloc(1024 * 1024 * 16);
+	ptr = malloc(1024 * 1024 * 128);
+	show_alloc_mem();
 	return (0);
 }

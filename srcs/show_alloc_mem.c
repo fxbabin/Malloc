@@ -6,7 +6,7 @@
 /*   By: fbabin <fbabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:45:09 by fbabin            #+#    #+#             */
-/*   Updated: 2019/07/15 19:04:26 by fbabin           ###   ########.fr       */
+/*   Updated: 2019/07/15 20:45:04 by fbabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static size_t	show_full_zone(t_zone *zone, const char *str)
 		zone = zone->next;
 	while (zone)
 	{
-		ft_printf("%d\n", zone->avail_bytes);
 		ft_printf("%s : %p\n", str, zone);
 		total += show_zone(zone);
 		zone = zone->prev;
