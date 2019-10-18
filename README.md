@@ -9,7 +9,7 @@ The malloc (in this project) must separate tiny, small and large allocations.
 For some optimization purpose, the newest allocations are located near the beginning of the double linked list.
 
 <p align="center">
-<img src="imgs/malloc_zones.png" alt="drawing" width="800"/>
+<img src="imgs/malloc_zones.png" alt="drawing" width="600" />
 <p/>
 
 For tiny and small zones this structure has been followed.
